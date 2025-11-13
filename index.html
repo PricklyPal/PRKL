@@ -30,7 +30,7 @@
 <body class="bg-gray-900 text-white min-h-screen flex items-center justify-center p-4">
 
     <!-- Card de Preço -->
-    <div class="bg-gray-800 p-8 rounded-xl shadow-2xl w-full max-w-md text-center">
+    <div class="bg-gray-800 p-6 sm:p-8 rounded-xl shadow-2xl w-full max-w-md text-center">
         
         <!-- Imagem do Token -->
         <img src="https://img1.wsimg.com/isteam/ip/907be967-2098-4041-809a-0b718d662147/coin.jpeg/:/cr=t:6.91%25,l:4.97%25,w:89.29%25,h:89.29%25/rs=w:1000,h:1000,cg:true,m" 
@@ -38,7 +38,8 @@
              class="w-24 h-24 rounded-full mx-auto mb-6 shadow-lg border-2 border-gray-700">
 
         <!-- Cabeçalho / Nome do Token -->
-        <h1 class="text-2xl font-bold text-cyan-400 mb-2" id="token-name">
+        <!-- Ajuste b) Fonte responsiva: text-xl em mobile, sm:text-2xl em desktop -->
+        <h1 class="text-xl sm:text-2xl font-bold text-cyan-400 mb-2" id="token-name">
             <!-- Estado inicial de carregamento para o nome -->
             <span class="pulse-loader" style="height: 32px; width: 200px;"></span>
         </h1>
@@ -46,14 +47,16 @@
 
         <!-- Preço -->
         <div class="my-4">
-            <div class="text-5xl font-bold text-white" id="token-price">
+            <!-- Ajuste c) Fonte responsiva para o preço: text-5xl em mobile, sm:text-6xl em desktop -->
+            <div class="text-5xl sm:text-6xl font-bold text-white" id="token-price">
                 <!-- Estado inicial de carregamento para o preço -->
                 <span class="pulse-loader" style="height: 48px; width: 250px;"></span>
             </div>
         </div>
 
         <!-- Botão Comprar (Alterado para um link com estilo de botão) -->
-        <div class="mt-8 mb-4">
+        <!-- Ajuste a) Espaçamento superior responsivo: mt-6 em mobile, sm:mt-8 em desktop -->
+        <div class="mt-6 sm:mt-8 mb-4">
             <a href="https://jup.ag/swap?sell=EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v&buy=DAXG5d2cMsWRFSrRFVrpGpVNqmrNP4FbTQXbusNHzFCy" 
                target="_blank" 
                rel="noopener noreferrer"
