@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Preço do Token</title>
+    <!-- Adiciona o Favicon de Cacto 🌵 (Emoji SVG) -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌵</text></svg>">
     <!-- Carrega o Tailwind CSS para estilização -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -38,7 +40,6 @@
              class="w-24 h-24 rounded-full mx-auto mb-6 shadow-lg border-2 border-gray-700">
 
         <!-- Cabeçalho / Nome do Token -->
-        <!-- Ajuste b) Fonte responsiva: text-xl em mobile, sm:text-2xl em desktop -->
         <h1 class="text-xl sm:text-2xl font-bold text-cyan-400 mb-2" id="token-name">
             <!-- Estado inicial de carregamento para o nome -->
             <span class="pulse-loader" style="height: 32px; width: 200px;"></span>
@@ -47,15 +48,14 @@
 
         <!-- Preço -->
         <div class="my-4">
-            <!-- Ajuste c) Fonte responsiva para o preço: text-5xl em mobile, sm:text-6xl em desktop -->
-            <div class="text-5xl sm:text-6xl font-bold text-white" id="token-price">
+            <!-- Ajuste da fonte: text-4xl em mobile (padrão) e sm:text-6xl em desktop/tablet -->
+            <div class="text-4xl sm:text-6xl font-bold text-white" id="token-price">
                 <!-- Estado inicial de carregamento para o preço -->
                 <span class="pulse-loader" style="height: 48px; width: 250px;"></span>
             </div>
         </div>
 
         <!-- Botão Comprar (Alterado para um link com estilo de botão) -->
-        <!-- Ajuste a) Espaçamento superior responsivo: mt-6 em mobile, sm:mt-8 em desktop -->
         <div class="mt-6 sm:mt-8 mb-4">
             <a href="https://jup.ag/swap?sell=EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v&buy=DAXG5d2cMsWRFSrRFVrpGpVNqmrNP4FbTQXbusNHzFCy" 
                target="_blank" 
