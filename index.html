@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preço do Token</title>
+    <!-- Carrega o Tailwind CSS para estilização -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Fonte personalizada suave */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Efeito de carregamento pulsante */
+        .pulse-loader {
+            display: inline-block;
+            width: 80px;
+            height: 24px;
+            background-color: #4b5563; /* gray-600 */
+            border-radius: 0.25rem; /* rounded */
+            animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white min-h-screen flex items-center justify-center p-4">
+
+    <!-- Card de Preço -->
+    <div class="bg-gray-800 p-8 rounded-xl shadow-2xl w-full max-w-md text-center">
+        
+        <!-- Imagem do Token -->
+        <img src="https://img1.wsimg.com/isteam/ip/907be967-2098-4041-809a-0b718d662147/coin.jpeg/:/cr=t:6.91%25,l:4.97%25,w:89.29%25,h:89.29%25/rs=w:1000,h:1000,cg:true,m" 
+             alt="Logo do Token" 
+             class="w-24 h-24 rounded-full mx-auto mb-6 shadow-lg border-2 border-gray-700">
+
+        <!-- Cabeçalho / Nome do Token -->
+        <h1 class="text-2xl font-bold text-cyan-400 mb-2" id="token-name">
+            <!-- Estado inicial de carregamento para o nome -->
+            <span class="pulse-loader" style="height: 32px; width: 200px;"></span>
+        </h1>
+        <p class="text-sm text-gray-400 mb-6">Preço em tempo real (USD)</p>
+
+        <!-- Preço -->
+        <div class="my-4">
+            <div class="text-5xl font-bold text-white" id="token-price">
+                <!-- Estado inicial de carregamento para o preço -->
+                <span class="pulse-loader" style="height: 48px; width: 250px;"></span>
+            </div>
+        </div>
+
+        <!-- Botão Comprar (Alterado para um link com estilo de botão) -->
+        <div class="mt-8 mb-4">
+            <a href="https://jup.ag/swap?sell=EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v&buy=DAXG5d2cMsWRFSrRFVrpGpVNqmrNP4FbTQXbusNHzFCy" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               class="inline-block bg-cyan-500 hover:bg-cyan-600 text-gray-900 font-bold py-3 px-8 rounded-lg w-full text-lg shadow-lg transition-colors duration-200 transform hover:scale-105">
+                Comprar
+            </a>
+        </div>
+
+        <!-- Status da Atualização -->
+        <div class="mt-6 text-xs text-gray-500">
+            Atualizado de: <a href="https://www.geckoterminal.com/" target="_blank" rel="noopener noreferrer" class="hover:text-cyan-400">GeckoTerminal</a>
+            <p id="last-updated" class="mt-1">Atualizando...</p>
+        </div>
+    </div>
+
+    <script>
+        // --- CONFIGURAÇÃO ---
+        // URL da API do GeckoTerminal para o pool específico
+        const apiUrl = 'https://api.geckoterminal.com/api/v2/networks/solana/pools/FuEHZ8rM3V5oYzyNpERZW9rCkR29gHYKnXtVLvJXLZjb';
+        
+        // Elementos do DOM
+        const nameElement = document.getElementById('token-name');
+        const priceElement = document.getElementById('token-price');
+        const updatedElement = document.getElementById('last-updated');
+
+        // --- LÓGICA DA APLICAÇÃO ---
+
+        /**
+         * Busca os dados da API e atualiza o DOM.
+         */
+        async function fetchPrice() {
+            try {
+                // 1. Fazer a chamada para a API
+                const response = await fetch(apiUrl);
+                if (!response.ok) {
+                    throw new Error(`Erro na API: ${response.statusText}`);
+                }
+                
+                const data = await response.json();
+
+                // 2. Extrair os dados relevantes do JSON
+                // O preço do token base (o seu) em USD
+                const priceUsd = data.data.attributes.base_token_price_usd;
+
+                // 3. Formatar o preço para exibição
+                // Isso cria um formato de moeda (ex: $0.0006248)
+                const formattedPrice = parseFloat(priceUsd).toLocaleString('en-US', {
+                    style: 'currency',
+                    currency: 'USD',
+                    minimumFractionDigits: 4,
+                    maximumFractionDigits: 8 // Aumenta a precisão para tokens de baixo valor
+                });
+
+                // 4. Atualizar o HTML
+                nameElement.textContent = '$PRKL'; // Exibe o nome customizado
+                priceElement.textContent = formattedPrice;
+                
+                // 5. Atualizar o carimbo de data/hora
+                const now = new Date();
+                updatedElement.textContent = `Última atualização: ${now.toLocaleTimeString()}`;
+
+            } catch (error) {
+                // 6. Lidar com erros
+                console.error('Erro ao buscar o preço:', error);
+                nameElement.textContent = 'Erro ao Carregar';
+                priceElement.textContent = ':(';
+                updatedElement.textContent = 'Não foi possível atualizar.';
+            }
+        }
+
+        // --- INICIALIZAÇÃO ---
+
+        // 1. Busca o preço imediatamente quando a página carrega
+        fetchPrice();
+
+        // 2. Configura um intervalo para atualizar o preço a cada 30 segundos (30000 ms)
+        setInterval(fetchPrice, 30000);
+    </script>
+
+</body>
+</html>
